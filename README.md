@@ -9,8 +9,10 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
 
 **Acknowledgements**
 
-*
-*
+* Rob Dickerson's BstMap.java class from spellcheck binary
+  search tree exercises from Class 22. Partner SJ Kim forked from original copy. (https://github.com/reflexpoem/spellcheck)
+* "Separating what from how: Interfaces in Java" reading
+  (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/interfaces.html)
 *
 
 **Instructions for use**
