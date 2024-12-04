@@ -36,6 +36,17 @@ public class BitTreeInteriorNode implements BitTreeNode {
     } // if/else
   } // BitTreeInteriorNode(int)
 
+  /**
+   * Create a new node when we don't know the bit value.
+   *
+   * @param l
+   *   The left child.
+   */
+  public BitTreeInteriorNode() {
+    this.left = null;
+    this.right = null;
+  } // BitTreeInteriorNode(int)
+
   // +---------+------------------------------------------------------
   // | Methods |
   // +---------+
