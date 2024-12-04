@@ -2,7 +2,7 @@ package edu.grinnell.csc207.util;
 
 /**
  * Nodes for the children of our bit tree.
- * Interior nodes do not store, but information about
+ * Interior nodes do not store values, but information about
  * the children of each node.
  * 
  * @author Nicole Gorrell
