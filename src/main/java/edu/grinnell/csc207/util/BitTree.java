@@ -19,7 +19,11 @@ public class BitTree {
   // +--------------+
 
   /**
-   *
+   * Builds a new bit tree that stores mappings from strings of n
+   * bits to strings.
+   * 
+   * @param n
+   *   The number of bits used to map to strings.
    */
   public BitTree(int n) {
   } // BitTree(int)
