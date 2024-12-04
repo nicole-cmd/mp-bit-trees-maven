@@ -1,5 +1,4 @@
 package edu.grinnell.csc207.util;
-import edu.grinnell.csc207.util.BitTreeLeaf;
 
 /**
  * Nodes for the children of our bit tree.
