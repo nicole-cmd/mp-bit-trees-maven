@@ -11,38 +11,17 @@ public interface BitTreeNode {
   // +---------+
 
   /**
-   * Get the node.
+   * Get the value of this node..
    * 
-   * @return the left/right node created.
+   * @return null.
    */
-  public BitTreeNode getNode();
-
-  /**
-   * Get the direction our node goes.
-   * 
-   * @return the value of the node 
-   *         based off the bit value (0 or 1).
-   */
-  public int getDir();
+  public String getValue();
 
   /**
    * Get the next node.
    *
-   * @return the next node, reflecting the
-   *         next level.
+   * @return the following node.
    */
   public BitTreeNode getNext();
-
-  /**
-   * Insert a new value after this node. Create
-   * a new leaf when we're at the end of the tree.
-   *
-   * @param str
-   *   The letter we want to insert.
-   *
-   * @return the new leaf node.
-   * @throws Exception if we are not end of the tree.
-   */
-  public BitTreeLeaf insertAfter(String str) throws Exception;
 
 } // interface BitTreeNode
