@@ -19,8 +19,10 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
   (https://github.com/khanhdo05/lab-tree-traversal-maven/tree/main)
 * MP9: Blockchains, completed with Khanh Do
   (https://github.com/nicole-cmd/mp-blockchains-maven/tree/main)
-* Beginning of "Binary search trees" lab, provided by SamR, work completed with SJ Kim (https://github.com/reflexpoem/lab-bsts-maven/tree/main)
-* "Doubly-linked lists" lab, completed with Slok Rajbhandari (https://github.com/nicole-cmd/lab-linked-lists-maven/tree/main)
+* Beginning of "Binary search trees" lab, provided by SamR,
+  work completed with SJ Kim (https://github.com/reflexpoem/lab-bsts-maven/tree/main)
+* "Doubly-linked lists" lab, completed with Slok
+  Rajbhandari (https://github.com/nicole-cmd/lab-linked-lists-maven/tree/main)
 
 **Instructions for use**
 
