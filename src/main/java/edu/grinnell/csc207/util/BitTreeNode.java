@@ -45,13 +45,4 @@ public interface BitTreeNode {
    */
   public BitTreeLeaf insertAfter(String str) throws Exception;
 
-  /**
-   * Go left if we read in a 0 bit.
-   * 
-   * @param bit
-   *   The bit we read.
-   * @return the left node we create.
-   */
-  public BitTreeNode findDir(char bit);
-
 } // interface BitTreeNode

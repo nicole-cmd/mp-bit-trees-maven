@@ -141,18 +141,20 @@ public class BitTree implements Iterable<BitTreeNode>{
                                           + " contains invalid values.");
     } // if
 
-    Iterator<BitTreeNode> n = this.iterator();
-    for (int i = 0; i < this.size; i++) {
-      BitTreeNode current = n.next();
-      // implement findDir method for each bits we read in ^
-      if (current.getNext().getNext() == null) {
-        try {
-          current.insertAfter(value);
-        } catch (Exception e) {
-          // Should not need to do anything
-        } // try/catch
-      } // if
+    char[] bitArr = bits.toCharArray();
+    BitTreeNode current = null;
+    for (char c : bitArr) {
+      BitTreeNode inNode = new BitTreeInteriorNode(c);
+      current = inNode;
     } // for
+
+    if (current.getNext() == null) {
+      try {
+        current.insertAfter(value);
+      } catch (Exception e) {
+        // Should not need to do anything
+      } // try/catch
+    } // if
   } // set(String, String)
 
   /**

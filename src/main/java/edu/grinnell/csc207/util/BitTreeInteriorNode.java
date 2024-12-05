@@ -123,16 +123,4 @@ public class BitTreeInteriorNode implements BitTreeNode {
     } // if/else
   } // insertAfter(String)
 
-  /**
-   * Determine which direction we go based on the bit we read in.
-   * 
-   * @param bit
-   *   The bit we read.
-   * @return the node we create based on the bit; determines our
-   *         direction in the tree.
-   */
-  public BitTreeNode findDir(char bit) {
-    return new BitTreeInteriorNode(bit);
-  } // findDir(char)
-
 } // class BitTreeInteriorNode
