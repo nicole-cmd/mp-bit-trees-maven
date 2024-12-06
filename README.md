@@ -23,6 +23,7 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
   work completed with SJ Kim (https://github.com/reflexpoem/lab-bsts-maven/tree/main)
 * "Doubly-linked lists" lab, completed with Slok
   Rajbhandari (https://github.com/nicole-cmd/lab-linked-lists-maven/tree/main)
+* Alma Ordaz, evening tutor, 12/5/24
 
 **Instructions for use**
 
