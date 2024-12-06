@@ -24,6 +24,8 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
 * "Doubly-linked lists" lab, completed with Slok
   Rajbhandari (https://github.com/nicole-cmd/lab-linked-lists-maven/tree/main)
 * Alma Ordaz, evening tutor, 12/5/24
+* "Simple Java for C programmers" reading
+  (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/simple-java-c.html)
 
 **Instructions for use**
 
