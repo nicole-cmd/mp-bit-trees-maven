@@ -26,6 +26,8 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
 * Alma Ordaz, evening tutor, 12/5/24
 * "Simple Java for C programmers" reading
   (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/simple-java-c.html)
+* "Eboard 25 (Section 2): Priority queues and heaps"
+  (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/eboards/eboard25-2.html)
 
 **Instructions for use**
 
