@@ -2,8 +2,8 @@ package edu.grinnell.csc207.util;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.NoSuchElementException;
-import java.util.Iterator;
+import java.lang.String;
+import java.util.Scanner;
 
 /**
  * Trees intended to be used in storing mappings between fixed-length 
@@ -11,7 +11,16 @@ import java.util.Iterator;
  *
  * @author Nicole Gorrell
  */
-public class BitTree implements Iterable<BitTreeNode> {
+public class BitTree {
+  // +-----------+------------------------------------------------
+  // | Constants |
+  // +-----------+
+
+  /** The initial index of a bit string input. */
+  private static final int BEG_BIT = 0;
+
+  /** The last index of a bit string input. */
+  private static final int END_BIT = 6;
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
@@ -25,7 +34,13 @@ public class BitTree implements Iterable<BitTreeNode> {
   /** The leaf of the tree that contains a value. */
   BitTreeLeaf leaf;
 
-  /** The next node, or level, in the tree. */
+  /** 
+   * Our current node. Will be set to the root when we want to
+   * traverse the tree. 
+   */
+  BitTreeNode current;
+
+  /** Node following the current one. */
   BitTreeNode next;
 
   // +--------------+------------------------------------------------
@@ -42,12 +57,12 @@ public class BitTree implements Iterable<BitTreeNode> {
   public BitTree(int n) {
     this.size = n;
     setNull(this.root, this.leaf);
+    this.current = this.root;
     setInterior(n);
   } // BitTree(int)
 
   /**
    * Builds a new empty bit tree.
-   *
    */
   public BitTree() {
     this(0);
@@ -73,27 +88,27 @@ public class BitTree implements Iterable<BitTreeNode> {
   } // setNull(BitTreeNode, BitTreeNode)
 
   /**
-   * Set next nodes.
+   * Set the interior nodes of the tree.
    *
    * @param bitSize
    *   How many next nodes we will have.
-   *
    */
   private void setInterior(int bitSize) {
-    this.next = this.root;
-    for (int i = 0; i < bitSize; i++) {
+    this.next = this.current;
+    for (int level = 0; level < bitSize; level++) {
       this.next = new BitTreeInteriorNode();
+      this.current = this.next;
     } // for
   } // setInterior(int)
 
   /**
    * Verify all values in a string bit are either 0 or 1.
    * 
-   * @param bit
+   * @param bits
    *   The string bit whose values we are checking.
    */
-  private boolean bitCheck(String bit) {
-    for (char c : bit.toCharArray()) {
+  private boolean bitCheck(String bits) {
+    for (char c : bits.toCharArray()) {
       if (!((c == '0') || (c == '1'))) {
         return false;
       } // if
@@ -103,98 +118,42 @@ public class BitTree implements Iterable<BitTreeNode> {
   } // bitCheck(String)
 
   /**
-   * Get an iterator for the tree.
+   * Verify the bit is an appropriate length.
    *
-   * @return the iterator.
-   */
-  public Iterator<BitTreeNode> iterator() {
-    return new Iterator<BitTreeNode>() {
-      int n = 0;
-      BitTreeNode next = root;
-
-      @Override
-      public boolean hasNext() {
-        return (n < size);
-      } // hasNext()
-
-      @Override
-      public BitTreeNode next() {
-        if (!this.hasNext()) {
-          throw new NoSuchElementException();
-        } // if
-
-        BitTreeNode current = this.next;
-        this.next = this.next.getNext();
-        ++this.n;
-        return current;
-      } // next()
-    }; // new Iterator()
-  } // iterator()
-
-  /**
-   * See if there is a next node in the tree.
+   * @param bits
    *
-   * @return true if there is a next node; false if not.
+   * @return true if the length is appropriate; false if not.
    */
-  public boolean containsNext() {
-    BitTreeNode check = new BitTreeInteriorNode();
-    if (!(this.next.getNode().equals(check))) {
+  private boolean bitLengthCheck(String bits) {
+    if (!(bits.length() < 6 || bits.length() > 8)) {
       return false;
     } // if
 
     return true;
-  } // containsNext()
-
-  // /**
-  //  * Find the node with the given letter value, or an exception
-  //  * if we cannot find it.
-  //  *
-  //  * @param letter
-  //  *
-  //  * @return the node where the desired value is stored.
-  //  * @throws NoSuchElementException
-  //  */
-  // @SuppressWarnings("unlikely-arg-type")
-  // private BitTreeNode find(String letter) throws NoSuchElementException {
-  //   int i = 0;
-  //   Iterator<BitTreeNode> nodes = this.iterator();
-
-  //   while (i < this.size) {
-  //     BitTreeNode node = nodes.next();
-  //     BitTreeLeaf check = new BitTreeLeaf(letter);
-  //     if (node.getNext().equals(check)) {
-  //       return node;
-  //     } // if
-
-  //     i++;
-  //   } // while
-
-  //   throw new NoSuchElementException("Letter does not exist in the tree.");
-  // } // find(String)
+  } // bitLengthCheck(String)
 
   /**
-   * Insert a new value after this node. Or, create
-   * a new leaf when we're at the end of the tree.
+   * Traverse this tree to get to the leaf.
    *
-   * @param str
-   *   The letter we want to insert.
+   * @param bits
+   *   The bits we process to traverse the tree.
    *
-   * @return the new leaf node.
-   * @throws Exception if we are not end of the tree.
+   * @return the current node we are at.
    */
-  // private BitTreeLeaf insertAfter(String str) throws Exception {
-  //   BitTreeLeaf leaf;
-  //   Iterator<BitTreeNode> n = this.iterator();
+  private BitTreeLeaf traverse(String bits) {
+    char[] bitArr = bits.toCharArray();
+    this.current = this.root;
 
-  //   while (n.hasNext()) {
-  //     if (n.next() == null) {
-  //       leaf = new BitTreeLeaf(str);
-  //       return leaf;
-  //     } // if
-  //   } // while
-  //   throw new Exception("Cannot insert leaf here; we are"
-  //                           +  " not at the end of the tree.");
-  // } // insertAfter(String)
+    for (int i = 0; i < this.size - 1; i++) {
+      if (bitArr[i] == '0') {
+        this.next = current.goLeft();
+      } else {
+        this.next = current.goRight();
+      } // if/else
+    } // for
+
+    return (BitTreeLeaf) current;
+  } // traverse()
 
   // +---------+-----------------------------------------------------
   // | Methods |
@@ -214,27 +173,13 @@ public class BitTree implements Iterable<BitTreeNode> {
    *                                   valid bit values.
    */
   public void set(String bits, String value) throws IndexOutOfBoundsException {
-    if (bits.length() < 6 || bits.length() > 8 || bitCheck(bits) != true) {
+    if (!(bitLengthCheck(bits) || bitCheck(bits))) {
       throw new IndexOutOfBoundsException("Bit length is inappropriate and/or bit"
                                           + " contains invalid values.");
     } // if
 
-    char[] bitArr = bits.toCharArray();
-    int b = 0; // index for bitArr
-
-    //if (!(current.getNext()))
-    Iterator<BitTreeNode> nodes = this.iterator();
-    while (nodes.hasNext()) {
-      if (bitArr[b] == '0') {
-        nodes.next().getNode() = goLeft();
-      } else {
-        nodes.next().getNode() = goRight();
-      }
-      b++;
-    } // while
-
+    this.leaf = this.traverse(bits);
     this.leaf = new BitTreeLeaf(value);
-  
   } // set(String, String)
 
   /**
@@ -248,37 +193,64 @@ public class BitTree implements Iterable<BitTreeNode> {
    *                                   or desired path doesn't exist.
    */
   public String get(String bits) throws IndexOutOfBoundsException {
-    char[] bitArr = bits.toCharArray();
+    if (!(bitLengthCheck(bits))) {
+      throw new IndexOutOfBoundsException("Bit length is inappropriate.");
+    } // if
+    String goal = "";
+    BitTreeLeaf end = null;
+    end = this.traverse(bits);
 
-    for (char c : bitArr) {
-      Iterator<BitTreeNode> n = this.iterator();
+    if (end != null) {
+      goal = end.getLetter();
+      return goal;
+    } // if
 
-      while (n.hasNext()) {
-        BitTreeNode current = n.next();
-        if (current.getDir() == c) {
-          if (current.getNext() != null) {
-            return current.getString();
-          } // if
-        } else {
-          throw new IndexOutOfBoundsException("Desired path doesn't exist.");
-        } // if/else
-      } // while
-    } // for
-    return "";  // STUB
+    throw new IndexOutOfBoundsException("Desired path doesn't exist.");
   } // get(String)
 
   /**
+   * Print out the tree in CSV format.
    *
+   * @param pen
+   *   The pen we use to print.
    */
   public void dump(PrintWriter pen) {
-    // STUB
+    String fin = "";
+    this.current = this.root;
+    for (int i = 0; i < this.size - 1; i++) {
+      if (!(this.next.equals(current.goLeft()))) {
+        fin.concat("1");
+      } else {
+        fin.concat("0");
+      } // if/else
+    } // for
+
+    fin.concat(", " + ((BitTreeLeaf) this.current).getLetter());
+    pen.println(fin);
   } // dump(PrintWriter)
 
   /**
+   * Reads a series of lines to store in the bit tree.
    *
+   * @param source
+   *   Where we get our bit lines from. Bits are in the form
+   *   'bits,value'.
    */
+  @SuppressWarnings("resource")
   public void load(InputStream source) {
-    // STUB
+    Scanner in = new Scanner(source);
+    boolean done = false;
+    String temp = "";
+    String bits = "";
+    String value = "";
+
+    while (!done) {
+      temp = in.nextLine();
+      bits = temp.substring(BEG_BIT, END_BIT);
+      value = temp.substring(END_BIT + 2); // so we don't grab the comma
+      this.set(bits, value);
+      done = true;
+    } // while
   } // load(InputStream)
 
 } // class BitTree

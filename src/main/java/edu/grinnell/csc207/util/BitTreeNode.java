@@ -11,17 +11,17 @@ public interface BitTreeNode {
   // +---------+
 
   /**
-   * Get the value of this node..
-   * 
-   * @return null.
+   * Get the left node for traversal.
+   *
+   * @return the left node.
    */
-  public String getValue();
+  public BitTreeNode goLeft();
 
   /**
-   * Get the next node.
+   * Get the right node for traversal.
    *
-   * @return the following node.
+   * @return the left node.
    */
-  public BitTreeNode getNext();
+  public BitTreeNode goRight();
 
 } // interface BitTreeNode

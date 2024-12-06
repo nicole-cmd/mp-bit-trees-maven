@@ -13,7 +13,7 @@ public class BitTreeInteriorNode implements BitTreeNode {
   // +--------+
 
   /** The value of the interior node. Will always be null. */
-  String val = null;
+  static final String val = null;
 
   /** Left (0) subtree. */
   BitTreeNode left;
@@ -21,8 +21,6 @@ public class BitTreeInteriorNode implements BitTreeNode {
   /** Right (1) subtree. */
   BitTreeNode right;
 
-  /** The next node. */
-  BitTreeNode next;
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
@@ -35,17 +33,16 @@ public class BitTreeInteriorNode implements BitTreeNode {
    * @param r
    *   The right child.
    */
-  public BitTreeInteriorNode(BitTreeNode l, BitTreeNode r, BitTreeNode n) {
+  public BitTreeInteriorNode(BitTreeNode l, BitTreeNode r) {
     this.left = l;
     this.right = r;
-    this.next = n;
   } // BitTreeInteriorNode(BitTreeNode, BitTreeNode, BitTreeNode)
 
   /**
    * Create a new node with null branches.
    */
   public BitTreeInteriorNode() {
-    this(null, null, null);
+    this(null, null);
   } // BitTreeInteriorNode()
 
   // +---------+------------------------------------------------------
@@ -53,32 +50,21 @@ public class BitTreeInteriorNode implements BitTreeNode {
   // +---------+
 
   /**
-   * Get the value of this node..
-   * 
-   * @return null.
-   */
-  public String getValue() {
-    return this.val;
-  } // getValue()
-
-  /**
-   * Get the next node.
+   * Get the left node for traversal.
    *
-   * @return the following node.
-   */
-  public BitTreeNode getNext() {
-    return this.next;
-  } // getNext()
-
-  /**
-   * 
-   * @return
+   * @return the left node.
    */
   public BitTreeNode goLeft() {
     return this.left;
-  }
+  } // goLeft()
 
+  /**
+   * Get the right node for traversal.
+   *
+   * @return the right node.
+   */
   public BitTreeNode goRight() {
     return this.right;
-  }
+  } // goRight()
+
 } // class BitTreeInteriorNode

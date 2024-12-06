@@ -40,4 +40,5 @@ public class BitTreeLeaf {
   public String getLetter() {
     return this.letter;
   } // getLetter()
+
 } // class BitTreeLeaf
