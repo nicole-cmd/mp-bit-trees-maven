@@ -61,15 +61,6 @@ public class BitTree {
     setInterior(n);
   } // BitTree(int)
 
-  /**
-   * Builds a new empty bit tree.
-   */
-  public BitTree() {
-    this(0);
-    setNull(this.root, this.leaf);
-    setInterior(0);
-  } // BitTree(int)
-
   // +---------------+-----------------------------------------------
   // | Local helpers |
   // +---------------+
