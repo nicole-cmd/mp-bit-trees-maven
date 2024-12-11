@@ -37,6 +37,8 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
   (https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html)
 * "java - Storing digits of numbers in array - Stack Overflow"
   (https://stackoverflow.com/questions/35105502/storing-digits-of-numbers-in-array)
+* "Simple Java for C programmers"
+  (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/simple-java-c.html)
 
 
 **Instructions for use**
