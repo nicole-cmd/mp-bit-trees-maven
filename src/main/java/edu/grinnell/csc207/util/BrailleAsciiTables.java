@@ -4,9 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.lang.Integer;
+import java.lang.Math;
+import java.lang.Character;
+import java.lang.String;
 
 /**
- *
+ * Information and methods to translate input to/from braille,
+ * ASCII, or Unicode.
  *
  * @author Nicole Gorrell
  * @author Samuel A. Rebelsky
@@ -175,6 +179,32 @@ public class BrailleAsciiTables {
       + "011111,283E\n"
       + "111111,283F\n";
 
+  /**
+   * Constant we multiply in hex-to-integer conversion.
+   */
+  static final int MULTIPLE = 16;
+
+  /**
+   * Adjustment value in hex-to-integer conversions, for letters
+   * A-F.
+   */
+  static final int ADJUST = 10;
+
+  /**
+   * First digit position in a hex code string.
+   */
+  static final int P1 = 1;
+
+  /**
+   * First digit position in a hex code string.
+   */
+  static final int P2 = 2;
+
+  /**
+   * First digit position in a hex code string.
+   */
+  static final int P3 = 3;
+
   // +---------------+-----------------------------------------------
   // | Static fields |
   // +---------------+
@@ -201,16 +231,36 @@ public class BrailleAsciiTables {
   /**
    * Convert a hex code value to an integer.
    *
-   * @param hex
-   *   The hex code we want to convert.
+   * @param process
+   *   The integer we need to fully convert.
+   * @param position
+   *   The position of this in-process integer in its string.
    *
    * @return the hex code in integer form.
    */
-  private static int hexTrans(String hex) {
+  private static int hexTrans(int process, int position) {
     int value = 0;
-    //finsih
-    return value;
-  } // hexTrans(String)
+
+    if ((process >= 0) && (process <= 9)) {
+      value = process - '0';
+    } else {
+      value = (process - 'A') + ADJUST;
+    } // if/else
+
+    switch (position) {
+      case P1:
+        value *= Math.pow(MULTIPLE, P3);
+        break;
+      case P2:
+        value *= Math.pow(MULTIPLE, P2);
+        break;
+      case P3:
+        value *= MULTIPLE;
+        break;
+    } // switch
+
+    return (int) value;
+  } // hexTrans(int, int)
 
   // +----------------+----------------------------------------------
   // | Static methods |
@@ -237,7 +287,8 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    return "";  // STUB
+
+    return Integer.toBinaryString(letter);
   } // toBraille(char)
 
   /**
@@ -261,7 +312,8 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    return "";  // STUB
+
+    return b2aTree.get(bits);
   } // toAscii(String)
 
   /**
@@ -286,9 +338,13 @@ public class BrailleAsciiTables {
       } // try/catch
     } // if
 
-    String braille = "";
+    int conversion = 0;
 
-    return braille;  // STUB
+    for (int i = 0; i < bits.length(); i++) {
+      conversion += hexTrans(Integer.parseInt(Character.toString(bits.charAt(i))), i);
+    } // for
+
+    return Character.toString(conversion);
   } // toUnicode(String)
 
 } // BrailleAsciiTables
