@@ -28,6 +28,16 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
   (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/simple-java-c.html)
 * "Eboard 25 (Section 2): Priority queues and heaps"
   (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/eboards/eboard25-2.html)
+* Character class documentation
+  (https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html)
+* Math class documentation
+  (https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html)
+* "Java Switch" (https://www.w3schools.com/java/java_switch.asp)
+* Integer class documentation
+  (https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html)
+* "java - Storing digits of numbers in array - Stack Overflow"
+  (https://stackoverflow.com/questions/35105502/storing-digits-of-numbers-in-array)
+
 
 **Instructions for use**
 
