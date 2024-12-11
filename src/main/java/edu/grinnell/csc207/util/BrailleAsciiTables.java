@@ -274,8 +274,10 @@ public class BrailleAsciiTables {
    *   The character we want to translate into bit form.
    *
    * @return the corresponding string of bits.
+   * @throws RuntimeException if we catch another exception when calling
+   *                          get with the converted binary input.
    */
-  public static String toBraille(char letter) {
+  public static String toBraille(char letter) throws RuntimeException {
     // Make sure we've loaded the ASCII-to-braille tree.
     if (null == a2bTree) {
       a2bTree = new BitTree(7);
@@ -288,7 +290,13 @@ public class BrailleAsciiTables {
       } // try/catch
     } // if
 
-    return Integer.toBinaryString(letter);
+    String bin = Integer.toBinaryString(letter);
+
+    try {
+      return a2bTree.get(bin);
+    } catch (IndexOutOfBoundsException e) {
+      throw new RuntimeException("Invalid ASCII input.");
+    } // try/catch
   } // toBraille(char)
 
   /**
@@ -299,8 +307,10 @@ public class BrailleAsciiTables {
    *   The string of bits we want to translate into ASCII form.
    *
    * @return the corresponding ASCII braille letter as a string.
+   * @throws RuntimeException if we catch an IndexOutofBoundsException
+   *                          when calling get on the input bits.
    */
-  public static String toAscii(String bits) {
+  public static String toAscii(String bits) throws RuntimeException {
     // Make sure we've loaded the braille-to-ASCII tree.
     if (null == b2aTree) {
       b2aTree = new BitTree(6);
@@ -313,7 +323,11 @@ public class BrailleAsciiTables {
       } // try/catch
     } // if
 
-    return b2aTree.get(bits);
+    try {
+      return b2aTree.get(bits); 
+    } catch (IndexOutOfBoundsException e) {
+      throw new RuntimeException("Invalid braille input.");
+    } // try/catch
   } // toAscii(String)
 
   /**
@@ -324,6 +338,9 @@ public class BrailleAsciiTables {
    *   The string of bits we want to translate into Unicode form.
    *
    * @return the Unicode braille character as a string.
+   * @throws RuntimeException if we catch an IndexOutOfBoundsException
+   *                          when passing in the bits derived from
+   *                          the input hex code.
    */
   public static String toUnicode(String bits) {
     // Make sure we've loaded the braille-to-ASCII tree.
@@ -344,7 +361,13 @@ public class BrailleAsciiTables {
       conversion += hexTrans(Integer.parseInt(Character.toString(bits.charAt(i))), i);
     } // for
 
-    return Character.toString(conversion);
+    String bitTrans = Character.toString(conversion);
+
+    try {
+      return b2uTree.get(bitTrans);
+    } catch (IndexOutOfBoundsException e) {
+      throw new RuntimeException("Invalid braille input.");
+    } // try/catch
   } // toUnicode(String)
 
 } // BrailleAsciiTables
