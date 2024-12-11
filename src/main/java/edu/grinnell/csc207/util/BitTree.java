@@ -2,11 +2,10 @@ package edu.grinnell.csc207.util;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.lang.String;
 import java.util.Scanner;
 
 /**
- * Trees intended to be used in storing mappings between fixed-length 
+ * Trees intended to be used in storing mappings between fixed-length
  * sequences of bits and corresponding values.
  *
  * @author Nicole Gorrell
@@ -34,9 +33,9 @@ public class BitTree {
   /** The leaf of the tree that contains a value. */
   BitTreeLeaf leaf;
 
-  /** 
+  /**
    * Our current node. Will be set to the root when we want to
-   * traverse the tree. 
+   * traverse the tree.
    */
   BitTreeNode current;
 
@@ -50,7 +49,7 @@ public class BitTree {
   /**
    * Builds a new bit tree that stores mappings from strings of n
    * bits to strings.
-   * 
+   *
    * @param n
    *   The number of bits used to map to strings.
    */
@@ -94,9 +93,11 @@ public class BitTree {
 
   /**
    * Verify all values in a string bit are either 0 or 1.
-   * 
+   *
    * @param bits
    *   The string bit whose values we are checking.
+   *
+   * @return true if each value is either 0 or 1; false otherwise.
    */
   private boolean bitCheck(String bits) {
     for (char c : bits.toCharArray()) {

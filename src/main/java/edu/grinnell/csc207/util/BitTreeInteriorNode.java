@@ -4,7 +4,7 @@ package edu.grinnell.csc207.util;
  * Nodes for the children of our bit tree.
  * Interior nodes do not store values, but information about
  * the children of each node.
- * 
+ *
  * @author Nicole Gorrell
  */
 public class BitTreeInteriorNode implements BitTreeNode {
@@ -13,7 +13,7 @@ public class BitTreeInteriorNode implements BitTreeNode {
   // +--------+
 
   /** The value of the interior node. Will always be null. */
-  static final String val = null;
+  String val = null;
 
   /** Left (0) subtree. */
   BitTreeNode left;

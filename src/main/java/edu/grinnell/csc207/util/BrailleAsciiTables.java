@@ -3,10 +3,6 @@ package edu.grinnell.csc207.util;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.IOException;
-import java.lang.Integer;
-import java.lang.Math;
-import java.lang.Character;
-import java.lang.String;
 
 /**
  * Information and methods to translate input to/from braille,
@@ -23,7 +19,7 @@ public class BrailleAsciiTables {
   /**
    * Conversions from ASCII to braille.
    */
-  static final String a2b = 
+  static final String a2b =
       "01000001,100000\n"
       + "01000010,110000\n"
       + "01000011,100100\n"
@@ -254,7 +250,7 @@ public class BrailleAsciiTables {
       case P2:
         value *= Math.pow(MULTIPLE, P2);
         break;
-      case P3:
+      default:
         value *= MULTIPLE;
         break;
     } // switch
@@ -324,7 +320,7 @@ public class BrailleAsciiTables {
     } // if
 
     try {
-      return b2aTree.get(bits); 
+      return b2aTree.get(bits);
     } catch (IndexOutOfBoundsException e) {
       throw new RuntimeException("Invalid braille input.");
     } // try/catch

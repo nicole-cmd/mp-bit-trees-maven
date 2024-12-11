@@ -2,7 +2,7 @@ package edu.grinnell.csc207.util;
 
 /**
  * Nodes for our bit tree.
- * 
+ *
  * @author Nicole Gorrell
  */
 public interface BitTreeNode {

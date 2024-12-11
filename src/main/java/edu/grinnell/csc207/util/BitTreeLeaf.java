@@ -3,7 +3,7 @@ package edu.grinnell.csc207.util;
 /**
  * Node for the leaf of our bit tree. Stores our string
  * information.
- * 
+ *
  * @author Nicole Gorrell
  */
 public class BitTreeLeaf {
@@ -34,7 +34,7 @@ public class BitTreeLeaf {
 
   /**
    * Get the string in the node.
-   * 
+   *
    * @return the string stored in the node.
    */
   public String getLetter() {

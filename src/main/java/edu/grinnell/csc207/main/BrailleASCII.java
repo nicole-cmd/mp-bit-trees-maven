@@ -31,11 +31,6 @@ public class BrailleASCII {
     String method = "";
     String message = "";
 
-    if (args.length != 2) {
-      System.err.println("Incorrect amount of inputs. Try again.");
-      return;
-    } // if
-
     while (!done) {
       method = in.next();
       message = in.next();
